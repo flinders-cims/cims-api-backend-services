@@ -21,7 +21,7 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
-        return ResponseEntity.ok("Registration Success");
+        return ResponseEntity.ok("Registration Successful");
     }
 
     @PostMapping("/user/login")
