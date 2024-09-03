@@ -5,13 +5,20 @@ import com.flinders.cims.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Random;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public UserService() {
+        this.passwordEncoder = new BCryptPasswordEncoder(); // Or inject this via @Bean configuration
+    }
 
     public User registerUser(User user) throws Exception {
 
@@ -26,6 +33,9 @@ public class UserService {
         while (userRepository.findById(userId).isPresent()) {
             userId = generateRandomUserId();
         }
+        // Hash the password before storing it
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         user.setUserId(userId);
         user.setUsername(userName);
         return userRepository.save(user);
@@ -33,7 +43,7 @@ public class UserService {
 
     public boolean authenticateUser(String username, String password) {
         return userRepository.findByUsername(username)
-                .map(user -> user.getPassword().equals(password))
+                .map(user -> passwordEncoder.matches(password, user.getPassword()))  // Compare hashed passwords
                 .orElse(false);
     }
 

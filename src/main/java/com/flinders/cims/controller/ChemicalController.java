@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/chemicals")
+@RequestMapping("/cims")
 public class ChemicalController {
 
     @Autowired
     private ChemicalService chemicalService;
 
-    @PostMapping
+    @PostMapping("/chemical/add")
     public Chemical addChemical(@RequestBody Chemical chemical) {
         return chemicalService.addChemical(chemical);
     }
 
-    @GetMapping
+    @GetMapping("/chemical/getAll")
     public List<Chemical> getAllChemicals() {
         return chemicalService.getAllChemicals();
     }
