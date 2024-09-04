@@ -50,15 +50,16 @@ After making some changes, if you want to push this new branch to your remote re
 
 Go to gitHub to create a pull request to merge branch changes to dev branch, would require code review and approvals to merge the code to the branch.
 
-## 2.	Software dependencies
+## 2. Software dependencies
 
-- Java: JDK 11 or higher
+- Java: JDK 17 or higher
 - Spring Boot: 2.5.x or higher
 - Maven: 3.6.x or higher
 - MySQL: 8.x or higher (or compatible database)
 - Postman to test locally
 
-API References
+## 3. API References
 API documentation is available through Swagger UI. Once the application is running, access it at:
 
+https://flinders-cims-api-dev.azurewebsites.net/swagger.html
 
