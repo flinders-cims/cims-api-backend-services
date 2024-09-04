@@ -1,9 +1,13 @@
 package com.flinders.cims.service;
 
 import com.flinders.cims.model.User;
+import com.flinders.cims.model.UserDTO;
 import com.flinders.cims.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -13,21 +17,28 @@ public class UserService {
     private UserRepository userRepository;
 
 
-    public User registerUser(User user) throws Exception {
+    public User registerUser(UserDTO userDTO) throws Exception {
 
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new Exception("Username '" + user.getUsername() + "' is already taken.");
+        if (userRepository.findByEmailId(userDTO.getEmailId()).isPresent()) {
+            throw new Exception("Email id '" + userDTO.getEmailId() + "' already exist in the System.");
         }
 
         // Generate a random 4-digit userId
         int userId = generateRandomUserId();
-        String userName = generateUserName(userId, user.getLastName());
+        String userName = generateUserName(userId, userDTO.getLastName());
         // Ensure the userId is unique
         while (userRepository.findById(userId).isPresent()) {
             userId = generateRandomUserId();
         }
+        User user = new User();
         user.setUserId(userId);
         user.setUsername(userName);
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(userDTO.getRole());
+        user.setEmailId(userDTO.getEmailId());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
         return userRepository.save(user);
     }
 
@@ -41,19 +52,24 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User updateUser(int id, User user) {
+    public User updateUser(int id, UserDTO userDTO) {
         User existingUser = getUserById(id);
         if (existingUser != null) {
-            existingUser.setPhoneNumber(user.getPhoneNumber());
-            existingUser.setFirstName(user.getFirstName() != null ? user.getFirstName(): existingUser.getFirstName());
-            existingUser.setLastName(user.getFirstName() != null ? user.getLastName(): existingUser.getLastName());
+            existingUser.setPhoneNumber(userDTO.getPhoneNumber() !=0 ? userDTO.getPhoneNumber(): existingUser.getPhoneNumber());
+            existingUser.setFirstName(userDTO.getFirstName() != null ? userDTO.getFirstName(): existingUser.getFirstName());
+            existingUser.setLastName(userDTO.getLastName() != null ? userDTO.getLastName(): existingUser.getLastName());
             return userRepository.save(existingUser);
         }
         return null;
     }
 
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
+    public String deleteUser(int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+            return "user deleted";
+        }
+        return "";
     }
 
     private int generateRandomUserId() {
@@ -66,5 +82,9 @@ public class UserService {
         String usernamePart = (lastName != null && lastName.length() >= 4) ? lastName.substring(0, 4).toLowerCase() : "cims";
         // Construct the username
         return usernamePart + userId + "@flinders.edu.au";
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

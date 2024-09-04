@@ -13,20 +13,23 @@ public class User {
     @Column(name = "user_name", nullable = false, unique = true, length = 100)  // Customize constraints
     private String username;
 
+    @Column(name = "first_name", nullable = false, length = 100)  // Adding firstName column
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 100)  // Adding lastName column
+    private String lastName;
+
     @Column(name = "password", nullable = false, length = 255)  // Customize column length
     private String password;
 
     @Column(name = "role", nullable = false, length = 50)  // Customize role field
     private String role;
 
+    @Column(name = "email_id", nullable = false, length = 50)  // Customize role field
+    private String emailId;
+
     @Column(name = "phone_number", nullable = false)  // Customize column name and set nullable constraint
-    private int phoneNumber;
-
-    @Column(name = "first_name", nullable = false, length = 100)  // Adding firstName column
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 100)  // Adding lastName column
-    private String lastName;
+    private long phoneNumber;
 
     // Getters and Setters
     public int getUserId() {
@@ -61,11 +64,11 @@ public class User {
         this.role = role;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -83,5 +86,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 }
