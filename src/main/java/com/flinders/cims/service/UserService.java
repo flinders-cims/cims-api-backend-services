@@ -3,18 +3,20 @@ package com.flinders.cims.service;
 import com.flinders.cims.model.User;
 import com.flinders.cims.model.UserDTO;
 import com.flinders.cims.repository.UserRepository;
+import com.flinders.cims.util.RandomNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RandomNumber randomNumber;
 
 
     public User registerUser(UserDTO userDTO) throws Exception {
@@ -24,11 +26,11 @@ public class UserService {
         }
 
         // Generate a random 4-digit userId
-        int userId = generateRandomUserId();
+        int userId = randomNumber.generateRandomNumber();
         String userName = generateUserName(userId, userDTO.getLastName());
         // Ensure the userId is unique
         while (userRepository.findById(userId).isPresent()) {
-            userId = generateRandomUserId();
+            userId = randomNumber.generateRandomNumber();
         }
         User user = new User();
         user.setUserId(userId);
@@ -70,11 +72,6 @@ public class UserService {
             return "user deleted";
         }
         return "";
-    }
-
-    private int generateRandomUserId() {
-        Random random = new Random();
-        return 1000 + random.nextInt(9000);
     }
 
     private String generateUserName(int userId, String lastName) {
