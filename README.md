@@ -62,5 +62,6 @@ Go to gitHub to create a pull request to merge branch changes to dev branch, wou
 API documentation is available through Swagger UI. Once the application is running, access it at:
 
 Dev - https://flinders-cims-api-dev.azurewebsites.net/swagger.html
+
 Test - https://flinders-cims-api-test.azurewebsites.net/swagger-ui.html
 
