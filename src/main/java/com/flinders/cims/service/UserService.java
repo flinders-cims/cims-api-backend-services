@@ -41,6 +41,7 @@ public class UserService {
         user.setRole(userDTO.getRole());
         user.setEmailId(userDTO.getEmailId());
         user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setManagerUserName(userDTO.getManagerUserName());
         return userRepository.save(user);
     }
 
@@ -60,6 +61,7 @@ public class UserService {
             existingUser.setPhoneNumber(userDTO.getPhoneNumber() !=0 ? userDTO.getPhoneNumber(): existingUser.getPhoneNumber());
             existingUser.setFirstName(userDTO.getFirstName() != null ? userDTO.getFirstName(): existingUser.getFirstName());
             existingUser.setLastName(userDTO.getLastName() != null ? userDTO.getLastName(): existingUser.getLastName());
+            existingUser.setManagerUserName(userDTO.getManagerUserName() != null ? userDTO.getManagerUserName(): existingUser.getManagerUserName());
             return userRepository.save(existingUser);
         }
         return null;

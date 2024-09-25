@@ -27,6 +27,7 @@ public class ResearchService {
 
     public Research createResearch(int userId, ResearchDTO researchDTO) {
         User user = userRepo.findById(userId).orElse(null);
+        user.setPassword("*********");
         Research research = new Research();
         LocalDate today = LocalDate.now();
         research.setResearchId(randomNumber.generateRandomNumber());
@@ -43,17 +44,26 @@ public class ResearchService {
     }
 
     public List<Research> getAllResearches() {
-        return researchRepository.findAll();
+        List<Research> researches = researchRepository.findAll();
+        researches.forEach(research -> {
+            if (research.getUser() != null) {
+                research.getUser().setPassword("*********");
+            }
+        });
+        return researches;
     }
 
     public Research getResearchById(int researchId) {
-        return researchRepository.findById(researchId).orElse(null);
+        Research research = researchRepository.findById(researchId).orElse(null);
+        if (research != null) {
+            research.getUser().setPassword("*********");
+        }
+        return research;
     }
 
     public Research updateResearch(int researchId, Research updatedResearch) {
         return researchRepository.findById(researchId)
                 .map(research -> {
-                    // Update only non-null fields
                     if (updatedResearch.getTitle() != null) {
                         research.setTitle(updatedResearch.getTitle());
                     }
