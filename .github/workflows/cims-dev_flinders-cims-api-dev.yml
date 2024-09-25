@@ -51,4 +51,4 @@ jobs:
           app-name: 'flinders-cims-api-dev'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_46F3CE17CE0142E89EEF52F50B18C47A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EAEE4C3332214808B0A8F920F14029B6 }}

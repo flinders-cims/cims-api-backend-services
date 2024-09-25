@@ -4,6 +4,9 @@ package com.flinders.cims.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "researches")
 public class Research {
@@ -35,7 +38,8 @@ public class Research {
     @JoinColumn(name = "user_id", nullable = false)  // Reference to the User entity
     private User user;
 
-    // Getters and Setters
+    @OneToMany(mappedBy = "research", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceRequest> serviceRequests = new ArrayList<>();
 
     public int getResearchId() {
         return researchId;
