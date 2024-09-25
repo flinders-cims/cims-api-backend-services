@@ -7,12 +7,14 @@ import jakarta.persistence.*;
 public class Chemical{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chemical_id", nullable = false, unique = true)
     private int chemicalId;
 
     @Column(name = "chemical_name", nullable = false, length = 100)
     private String chemicalName;
+
+    @Column(name = "systematic_name", nullable = false, length = 100)
+    private String systematicName;
 
     @Column(name = "generic_risk_category", length = 100)
     private String genericRiskCategory;
@@ -75,6 +77,22 @@ public class Chemical{
 
     public void setRiskLevel(RiskLevel riskLevel) {
         this.riskLevel = riskLevel;
+    }
+
+    public String getChemicalName() {
+        return chemicalName;
+    }
+
+    public void setChemicalName(String chemicalName) {
+        this.chemicalName = chemicalName;
+    }
+
+    public String getSystematicName() {
+        return systematicName;
+    }
+
+    public void setSystematicName(String systematicName) {
+        this.systematicName = systematicName;
     }
 
     // Enum for risk level
