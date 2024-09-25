@@ -8,6 +8,7 @@ public class UserDTO {
     private String role;
     private String emailId;
     private long phoneNumber;
+    private String managerUserName;
 
     // Getters and Setters
     public String getFirstName() {
@@ -32,6 +33,10 @@ public class UserDTO {
 
     public long getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getManagerUserName() {
+        return managerUserName;
     }
 }
 
