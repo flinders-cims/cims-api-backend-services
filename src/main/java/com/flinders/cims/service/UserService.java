@@ -62,6 +62,7 @@ public class UserService {
             existingUser.setFirstName(userDTO.getFirstName() != null ? userDTO.getFirstName(): existingUser.getFirstName());
             existingUser.setLastName(userDTO.getLastName() != null ? userDTO.getLastName(): existingUser.getLastName());
             existingUser.setManagerUserName(userDTO.getManagerUserName() != null ? userDTO.getManagerUserName(): existingUser.getManagerUserName());
+            existingUser.setPassword(userDTO.getPassword() != null ? userDTO.getPassword(): existingUser.getPassword());
             return userRepository.save(existingUser);
         }
         return null;
