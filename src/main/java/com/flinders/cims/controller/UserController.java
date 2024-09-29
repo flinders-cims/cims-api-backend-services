@@ -70,9 +70,9 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     @PutMapping("/user/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
         User updatedUser = userService.updateUser(id, userDTO);
-        return ResponseEntity.ok(updatedUser);
+        return updatedUser != null ? ResponseEntity.ok("Updated successfully") : ResponseEntity.status(404).body("Update Failed");
     }
 
     @Operation(summary = "Delete user", description = "Delete a user by user ID.")

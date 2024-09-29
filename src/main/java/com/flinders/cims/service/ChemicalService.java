@@ -61,5 +61,9 @@ public class ChemicalService {
     public void deleteChemical(int chemicalId) {
         chemicalRepository.deleteById(chemicalId);
     }
+
+//    public List<Chemical> getChemicalsByUserId(int userId) {
+//        return chemicalRepository.findByUserId(userId);
+//    }
 }
 

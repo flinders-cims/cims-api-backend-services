@@ -18,6 +18,8 @@ public class ResearchService {
 
     @Autowired
     private ResearchRepository researchRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private RandomNumber randomNumber;
@@ -84,6 +86,14 @@ public class ResearchService {
 
     public void deleteResearch(int researchId) {
         researchRepository.deleteById(researchId);
+    }
+
+    public List<Research> getResearchesByUserId(int userId) {
+        if (userRepository.findById(userId).isPresent()) {
+            List<Research> researches = researchRepository.findByUser_UserId(userId);
+            researches.forEach(research -> research.setUser(null));
+            return researches;
+        } else return null;
     }
 }
 

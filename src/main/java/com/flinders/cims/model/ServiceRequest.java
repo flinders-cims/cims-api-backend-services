@@ -40,6 +40,9 @@ public class ServiceRequest {
     @Column(name = "date_closed")
     private LocalDate dateClosed;
 
+    @Column(name = "approver_user_name", columnDefinition = "TEXT")
+    private String approverUsername;
+
     @Column(name = "approver_comments", columnDefinition = "TEXT")
     private String approverComments;
 

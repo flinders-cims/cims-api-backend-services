@@ -13,7 +13,7 @@ public class User {
     @Column(name = "user_name", nullable = false, unique = true, length = 100)  // Customize constraints
     private String username;
 
-    @Column(name = "manager_user_name", nullable = false, unique = true, length = 100)  // Customize constraints
+    @Column(name = "manager_user_name", nullable = false, length = 100)  // Customize constraints
     private String managerUserName;
 
     @Column(name = "first_name", nullable = false, length = 100)  // Adding firstName column

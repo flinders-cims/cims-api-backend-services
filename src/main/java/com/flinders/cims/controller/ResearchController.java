@@ -7,13 +7,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cims")
+@RequestMapping("/cims/research")
 public class ResearchController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class ResearchController {
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PostMapping("/research/add/{userId}")
+    @PostMapping("/add/{userId}")
     public ResponseEntity<Research> createResearch(@PathVariable int userId, @RequestBody ResearchDTO research) {
         Research createdResearch = researchService.createResearch(userId, research);
         return ResponseEntity.ok(createdResearch);
@@ -37,7 +38,7 @@ public class ResearchController {
             @ApiResponse(responseCode = "204", description = "No researches found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/research/getAll")
+    @GetMapping("/getAll")
     public ResponseEntity<List<Research>> getAllResearches() {
         List<Research> researches = researchService.getAllResearches();
         return ResponseEntity.ok(researches);
@@ -49,7 +50,7 @@ public class ResearchController {
             @ApiResponse(responseCode = "404", description = "Research not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/research/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Research> getResearchById(@PathVariable int id) {
         Research research = researchService.getResearchById(id);
         if (research != null) {
@@ -66,7 +67,7 @@ public class ResearchController {
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PutMapping("/research/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Research> updateResearch(@PathVariable int id, @RequestBody Research updatedResearch) {
         Research research = researchService.updateResearch(id, updatedResearch);
         if (research != null) {
@@ -82,9 +83,25 @@ public class ResearchController {
             @ApiResponse(responseCode = "404", description = "Research not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @DeleteMapping("/research/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteResearch(@PathVariable int id) {
         researchService.deleteResearch(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Retrieve all researches for a given user", description = "Fetches all researches associated with a user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of researches"),
+            @ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    @GetMapping("/getAll/{userId}")
+    public ResponseEntity<Object>  getAllResearchesByUserId(@PathVariable int userId) {
+        List<Research> researchList = researchService.getResearchesByUserId(userId);
+        if (researchList == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User ID not Found"); // No research found, return 404
+        }
+
+        return ResponseEntity.ok(researchList);
     }
 }
