@@ -45,10 +45,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean authenticateUser(String username, String password) {
+    public User authenticateUser(String username, String password) {
         return userRepository.findByUsername(username)
-                .map(user -> user.getPassword().equals(password))
-                .orElse(false);
+                .filter(user -> user.getPassword().equals(password))
+                .orElse(null);  // Return null if authentication fails
     }
 
     public User getUserById(int id) {

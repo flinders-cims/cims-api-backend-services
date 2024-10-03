@@ -42,14 +42,14 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "Invalid credentials")
     })
     @PostMapping("/user/login")
-    public ResponseEntity<String> loginUser(
+    public ResponseEntity<User> loginUser(
             @RequestParam String username,
             @RequestParam String password) {
-        boolean isAuthenticated = userService.authenticateUser(username, password);
-        if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+        User validatedUser = userService.authenticateUser(username, password);
+        if (validatedUser != null) {
+            return ResponseEntity.ok(validatedUser);
         } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
+            return ResponseEntity.status(401).body(null);
         }
     }
 
@@ -99,10 +99,10 @@ public class UserController {
         List<User> users = userService.getAllUsers();
 
         if (users.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content if no users are found
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(users, HttpStatus.OK); // 200 OK if users are found
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
 }
