@@ -53,6 +53,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("/user/logins")
+    public ResponseEntity<String> loginUsers(@RequestParam String username, @RequestParam String password) {
+        boolean isAuthenticated = userService.authenticateUsers(username, password);
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+                return ResponseEntity.status(401).body("Invalid credentials");
+        }
+    }
+
     @Operation(summary = "Get user by ID", description = "Fetch user details by user ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation"),

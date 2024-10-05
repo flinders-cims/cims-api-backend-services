@@ -51,6 +51,12 @@ public class UserService {
                 .orElse(null);  // Return null if authentication fails
     }
 
+    public boolean authenticateUsers(String username, String password) {
+        return userRepository.findByUsername(username)
+                .map(user -> user.getPassword().equals(password))
+                .orElse(false);
+    }
+
     public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
     }
