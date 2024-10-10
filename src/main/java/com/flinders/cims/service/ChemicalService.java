@@ -63,7 +63,7 @@ public class ChemicalService {
     }
 
 //    public List<Chemical> getChemicalsByUserId(int userId) {
-//        return chemicalRepository.findByUserId(userId);
+//        return chemicalRepository.findByUser_UserId(userId);
 //    }
 }
 

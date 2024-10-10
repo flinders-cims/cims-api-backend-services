@@ -1,6 +1,6 @@
 package com.flinders.cims.model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class ServiceRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sr_id", nullable = false, unique = true)
     private int srId;
 
@@ -68,7 +67,204 @@ public class ServiceRequest {
     @JoinColumn(name = "storage_location_id")  // Link to Storage Locations table
     private StorageLocation storageLocation;
 
-    // Getters and Setters
-    //...
-}
+    @Column(name = "risk_score", nullable = false)
+    private int riskScore;  // Dropdown with values from 0 to 10
 
+    @Column(name = "cas_number", nullable = false)
+    private String casNumber;  // CAS Number for the chemical
+
+    @Column(name = "hazard_type", nullable = false)
+    private String hazardType;  // Dropdown for hazard types (values from PDF Section 3)
+
+    @Column(name = "is_toxic", nullable = false)
+    private boolean isToxic;  // Yes or No dropdown
+
+    @Column(name = "toxic_effect", nullable = true)
+    private String toxicEffect;  // Dropdown with values if toxic
+
+    // Getters and Setters
+
+    public int getSrId() {
+        return srId;
+    }
+
+    public void setSrId(int srId) {
+        this.srId = srId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Chemical getChemical() {
+        return chemical;
+    }
+
+    public void setChemical(Chemical chemical) {
+        this.chemical = chemical;
+    }
+
+    public Research getResearch() {
+        return research;
+    }
+
+    public void setResearch(Research research) {
+        this.research = research;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public RiskLevel getRiskLevel() {
+        return riskLevel;
+    }
+
+    public void setRiskLevel(RiskLevel riskLevel) {
+        this.riskLevel = riskLevel;
+    }
+
+    public LocalDate getDateRequested() {
+        return dateRequested;
+    }
+
+    public void setDateRequested(LocalDate dateRequested) {
+        this.dateRequested = dateRequested;
+    }
+
+    public LocalDate getDateApproved() {
+        return dateApproved;
+    }
+
+    public void setDateApproved(LocalDate dateApproved) {
+        this.dateApproved = dateApproved;
+    }
+
+    public LocalDate getDateClosed() {
+        return dateClosed;
+    }
+
+    public void setDateClosed(LocalDate dateClosed) {
+        this.dateClosed = dateClosed;
+    }
+
+    public String getApproverUsername() {
+        return approverUsername;
+    }
+
+    public void setApproverUsername(String approverUsername) {
+        this.approverUsername = approverUsername;
+    }
+
+    public String getApproverComments() {
+        return approverComments;
+    }
+
+    public void setApproverComments(String approverComments) {
+        this.approverComments = approverComments;
+    }
+
+    public int getQuantityRequested() {
+        return quantityRequested;
+    }
+
+    public void setQuantityRequested(int quantityRequested) {
+        this.quantityRequested = quantityRequested;
+    }
+
+    public int getQuantityReceived() {
+        return quantityReceived;
+    }
+
+    public void setQuantityReceived(int quantityReceived) {
+        this.quantityReceived = quantityReceived;
+    }
+
+    public String getUnitOfQuantity() {
+        return unitOfQuantity;
+    }
+
+    public void setUnitOfQuantity(String unitOfQuantity) {
+        this.unitOfQuantity = unitOfQuantity;
+    }
+
+    public int getQuantityDisposed() {
+        return quantityDisposed;
+    }
+
+    public void setQuantityDisposed(int quantityDisposed) {
+        this.quantityDisposed = quantityDisposed;
+    }
+
+    public int getQuantityReturned() {
+        return quantityReturned;
+    }
+
+    public void setQuantityReturned(int quantityReturned) {
+        this.quantityReturned = quantityReturned;
+    }
+
+    public LocalDate getReturnedDate() {
+        return returnedDate;
+    }
+
+    public void setReturnedDate(LocalDate returnedDate) {
+        this.returnedDate = returnedDate;
+    }
+
+    public StorageLocation getStorageLocation() {
+        return storageLocation;
+    }
+
+    public void setStorageLocation(StorageLocation storageLocation) {
+        this.storageLocation = storageLocation;
+    }
+
+    public int getRiskScore() {
+        return riskScore;
+    }
+
+    public void setRiskScore(int riskScore) {
+        this.riskScore = riskScore;
+    }
+
+    public String getCasNumber() {
+        return casNumber;
+    }
+
+    public void setCasNumber(String casNumber) {
+        this.casNumber = casNumber;
+    }
+
+    public String getHazardType() {
+        return hazardType;
+    }
+
+    public void setHazardType(String hazardType) {
+        this.hazardType = hazardType;
+    }
+
+    public boolean isToxic() {
+        return isToxic;
+    }
+
+    public void setToxic(boolean toxic) {
+        isToxic = toxic;
+    }
+
+    public String getToxicEffect() {
+        return toxicEffect;
+    }
+
+    public void setToxicEffect(String toxicEffect) {
+        this.toxicEffect = toxicEffect;
+    }
+}
