@@ -29,7 +29,6 @@ public class ResearchService {
 
     public Research createResearch(int userId, ResearchDTO researchDTO) {
         User user = userRepo.findById(userId).orElse(null);
-        user.setPassword("*********");
         Research research = new Research();
         LocalDate today = LocalDate.now();
         research.setResearchId(randomNumber.generateRandomNumber());
