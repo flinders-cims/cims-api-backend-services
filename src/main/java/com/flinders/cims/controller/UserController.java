@@ -1,5 +1,6 @@
 package com.flinders.cims.controller;
 
+import com.flinders.cims.model.LoginRequest;
 import com.flinders.cims.model.User;
 import com.flinders.cims.model.UserDTO;
 import com.flinders.cims.service.UserService;
@@ -42,9 +43,9 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "Invalid credentials")
     })
     @PostMapping("/user/login")
-    public ResponseEntity<User> loginUser(
-            @RequestParam String username,
-            @RequestParam String password) {
+    public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
         User validatedUser = userService.authenticateUser(username, password);
         if (validatedUser != null) {
             return ResponseEntity.ok(validatedUser);
