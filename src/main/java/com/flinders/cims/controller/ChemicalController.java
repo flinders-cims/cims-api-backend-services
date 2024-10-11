@@ -19,7 +19,7 @@ public class ChemicalController {
     @Autowired
     private ChemicalService chemicalService;
 
-    @Operation(summary = "Retrieve all chemicals", description = "Fetches all chemicals in the system.")
+    @Operation(summary = "Retrieve all chemicals", description = "Fetches  chemicals in the system.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of chemicals"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
