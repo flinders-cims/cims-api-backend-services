@@ -1,16 +1,8 @@
 name: Build and deploy JAR app to Azure Web App - flinders-cims-api-dev
 
 on:
-  push:
-    branches:
-      - cims-dev
-  pull_request:
-    branches:
-      - cims-dev
-  workflow_run:
-    workflows: ["Azure Static Web Apps CI/CD"]
-    types:
-      - completed
+  repository_dispatch:
+    types: [trigger-backend-deploy]
 
 jobs:
   build:
@@ -40,13 +32,13 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-      
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
