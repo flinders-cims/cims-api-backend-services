@@ -104,4 +104,20 @@ public class ResearchController {
 
         return ResponseEntity.ok(researchList);
     }
+
+    @Operation(summary = "Get the count of researches for a given user", description = "Fetches the total number of researches associated with a user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved the count of researches"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @GetMapping("/getCount/{userId}")
+    public ResponseEntity<Object> getResearchCountByUserId(@PathVariable int userId) {
+        long researchCount = researchService.getResearchCountByUserId(userId);
+        if (researchCount == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No research found for this User ID");
+        }
+
+        return ResponseEntity.ok(researchCount);
+    }
 }

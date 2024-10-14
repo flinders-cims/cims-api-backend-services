@@ -8,5 +8,4 @@ import java.util.Optional;
 @Repository
 public interface ChemicalRepository extends JpaRepository<Chemical, Integer> {
     Optional<Chemical> findBySystematicName(String systematicName);
-//    List<Chemical> findByUser_UserId(int userId);
 }
