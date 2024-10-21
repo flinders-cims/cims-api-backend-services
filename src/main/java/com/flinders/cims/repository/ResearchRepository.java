@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ResearchRepository extends JpaRepository<Research, Integer> {
     List<Research> findByUser_UserId(int userId);
+    Research findByTitle(String title);
 }

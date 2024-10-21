@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class ServiceRequestDTO {
     private int userId;
-    private int chemicalId;
-    private int researchId;
+    private String chemicalName;
+    private String researchTitle;
     private String status;
-    private RiskLevel riskLevel;
+    private int riskLevel;
     private LocalDate dateRequested;
     private LocalDate dateApproved;
     private LocalDate dateClosed;
@@ -30,19 +30,18 @@ public class ServiceRequestDTO {
         return userId;
     }
 
-    public int getChemicalId() {
-        return chemicalId;
+    public String getChemicalName() {
+        return chemicalName;
     }
 
-    public int getResearchId() {
-        return researchId;
+    public String getResearchTitle() {
+        return researchTitle;
     }
-
     public String getStatus() {
         return status;
     }
 
-    public RiskLevel getRiskLevel() {
+    public int getRiskLevel() {
         return riskLevel;
     }
 

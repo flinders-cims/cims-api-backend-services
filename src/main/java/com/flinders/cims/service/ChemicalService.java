@@ -61,5 +61,12 @@ public class ChemicalService {
     public void deleteChemical(int chemicalId) {
         chemicalRepository.deleteById(chemicalId);
     }
+    public Optional<Chemical> getChemicalByName(String name) {
+        return chemicalRepository.findByName(name);
+    }
+    // Retrieve a single chemical by CAS number
+    public Optional<Chemical> getChemicalByCasNumber(String casNumber) {
+        return chemicalRepository.findByCasNumber(casNumber);
+    }
 }
 
