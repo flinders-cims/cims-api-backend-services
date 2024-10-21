@@ -10,11 +10,12 @@ public class ServiceRequestDTO {
     private int riskLevel;
     private LocalDate dateRequested;
     private LocalDate dateApproved;
+    private LocalDate dateRejected;
     private LocalDate dateClosed;
     private String approverUsername;
     private String approverComments;
     private int quantityRequested;
-    private int quantityReceived;
+    private int quantityApproved;
     private String unitOfQuantity;
     private int quantityDisposed;
     private int quantityReturned;
@@ -25,6 +26,9 @@ public class ServiceRequestDTO {
     private String hazardType;
     private boolean isToxic;
     private String toxicEffect;
+    private String approverComment;
+    private boolean isStored;
+    private boolean isDisposed;
 
     public int getUserId() {
         return userId;
@@ -70,7 +74,7 @@ public class ServiceRequestDTO {
     }
 
     public int getQuantityReceived() {
-        return quantityReceived;
+        return quantityApproved;
     }
 
     public String getUnitOfQuantity() {
@@ -111,5 +115,25 @@ public class ServiceRequestDTO {
 
     public String getToxicEffect() {
         return toxicEffect;
+    }
+
+    public LocalDate getDateRejected() {
+        return dateRejected;
+    }
+
+    public int getQuantityApproved() {
+        return quantityApproved;
+    }
+
+    public String getApproverComment() {
+        return approverComment;
+    }
+
+    public boolean isStored() {
+        return isStored;
+    }
+
+    public boolean isDisposed() {
+        return isDisposed;
     }
 }

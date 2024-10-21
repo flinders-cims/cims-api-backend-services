@@ -36,14 +36,17 @@ public class ServiceRequest {
     @Column(name = "date_approved")
     private LocalDate dateApproved;
 
+    @Column(name = "date_rejected")
+    private LocalDate dateRejected;
+
     @Column(name = "date_closed")
     private LocalDate dateClosed;
 
     @Column(name = "approver_user_name", columnDefinition = "TEXT")
     private String approverUsername;
 
-    @Column(name = "approver_comments", columnDefinition = "TEXT")
-    private String approverComments;
+    @Column(name = "approver_comment", columnDefinition = "TEXT")
+    private String approverComment;
 
     @Column(name = "quantity_requested", nullable = false)
     private int quantityRequested;
@@ -74,13 +77,19 @@ public class ServiceRequest {
     private String casNumber;  // CAS Number for the chemical
 
     @Column(name = "hazard_type", nullable = false)
-    private String hazardType;  // Dropdown for hazard types (values from PDF Section 3)
+    private String hazardType;  // Dropdown for hazard types
 
     @Column(name = "is_toxic", nullable = false)
     private boolean isToxic;  // Yes or No dropdown
 
-    @Column(name = "toxic_effect", nullable = true)
+    @Column(name = "toxic_effect", columnDefinition = "TEXT")
     private String toxicEffect;  // Dropdown with values if toxic
+
+    @Column(name = "is_stored", nullable = false)
+    private boolean isStored;  // Newly added field for storage status
+
+    @Column(name = "is_disposed", nullable = false)
+    private boolean isDisposed;  // Newly added field for disposal status
 
     // Getters and Setters
 
@@ -148,6 +157,14 @@ public class ServiceRequest {
         this.dateApproved = dateApproved;
     }
 
+    public LocalDate getDateRejected() {
+        return dateRejected;
+    }
+
+    public void setDateRejected(LocalDate dateRejected) {
+        this.dateRejected = dateRejected;
+    }
+
     public LocalDate getDateClosed() {
         return dateClosed;
     }
@@ -164,12 +181,12 @@ public class ServiceRequest {
         this.approverUsername = approverUsername;
     }
 
-    public String getApproverComments() {
-        return approverComments;
+    public String getApproverComment() {
+        return approverComment;
     }
 
-    public void setApproverComments(String approverComments) {
-        this.approverComments = approverComments;
+    public void setApproverComment(String approverComment) {
+        this.approverComment = approverComment;
     }
 
     public int getQuantityRequested() {
@@ -266,5 +283,21 @@ public class ServiceRequest {
 
     public void setToxicEffect(String toxicEffect) {
         this.toxicEffect = toxicEffect;
+    }
+
+    public boolean isStored() {
+        return isStored;
+    }
+
+    public void setStored(boolean stored) {
+        isStored = stored;
+    }
+
+    public boolean isDisposed() {
+        return isDisposed;
+    }
+
+    public void setDisposed(boolean disposed) {
+        isDisposed = disposed;
     }
 }

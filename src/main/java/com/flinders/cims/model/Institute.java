@@ -21,6 +21,36 @@ public class Institute {
     @OneToMany(mappedBy = "institute", cascade = CascadeType.ALL)
     private List<StorageLocation> storageLocations;
 
-    // Getters and Setters
+    public int getInstituteId() {
+        return instituteId;
+    }
+
+    public void setInstituteId(int instituteId) {
+        this.instituteId = instituteId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<ResearchCenter> getResearchCenters() {
+        return researchCenters;
+    }
+
+    public void setResearchCenters(List<ResearchCenter> researchCenters) {
+        this.researchCenters = researchCenters;
+    }
+
+    public List<StorageLocation> getStorageLocations() {
+        return storageLocations;
+    }
+
+    public void setStorageLocations(List<StorageLocation> storageLocations) {
+        this.storageLocations = storageLocations;
+    }
 }
 

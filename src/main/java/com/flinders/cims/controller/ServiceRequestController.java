@@ -18,7 +18,7 @@ public class ServiceRequestController {
     private ServiceRequestService serviceRequestService;
 
     // Create a new ServiceRequest
-    @PostMapping("/create")
+        @PostMapping("/create")
     public ResponseEntity<ServiceRequest> createServiceRequest(@RequestBody ServiceRequestDTO serviceRequest) {
         ServiceRequest createdRequest = serviceRequestService.saveServiceRequest(serviceRequest);
         return ResponseEntity.ok(createdRequest);
@@ -32,18 +32,18 @@ public class ServiceRequestController {
     }
 
     // Get a single ServiceRequest by ID
-    @GetMapping("/get/{id}")
-    public ResponseEntity<ServiceRequest> getServiceRequestById(@PathVariable int id) {
-        Optional<ServiceRequest> serviceRequest = serviceRequestService.getServiceRequestById(id);
+    @GetMapping("/get/{userId}")
+    public ResponseEntity<ServiceRequest> getServiceRequestById(@PathVariable int userId) {
+        Optional<ServiceRequest> serviceRequest = serviceRequestService.getServiceRequestById(userId);
         return serviceRequest.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Update an existing ServiceRequest
     @PutMapping("/update/{id}")
-    public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int id, @RequestBody ServiceRequest serviceRequestDetails) {
-        Optional<ServiceRequest> existingServiceRequest = serviceRequestService.getServiceRequestById(id);
+    public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int userId, @RequestBody ServiceRequestDTO serviceRequestDTO) {
+        Optional<ServiceRequest> existingServiceRequest = serviceRequestService.getServiceRequestById(userId);
         if (existingServiceRequest.isPresent()) {
-            ServiceRequest updatedRequest = serviceRequestService.updateServiceRequest(existingServiceRequest.get(), serviceRequestDetails);
+            ServiceRequest updatedRequest = serviceRequestService.updateServiceRequest(existingServiceRequest.get(), serviceRequestDTO);
             return ResponseEntity.ok(updatedRequest);
         } else {
             return ResponseEntity.notFound().build();

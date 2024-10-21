@@ -21,5 +21,37 @@ public class Laboratory {
 
     @OneToMany(mappedBy = "laboratory", cascade = CascadeType.ALL)
     private List<StorageLocation> storageLocations;
+
+    public int getLabId() {
+        return labId;
+    }
+
+    public void setLabId(int labId) {
+        this.labId = labId;
+    }
+
+    public String getLabName() {
+        return labName;
+    }
+
+    public void setLabName(String labName) {
+        this.labName = labName;
+    }
+
+    public ResearchCenter getResearchCenter() {
+        return researchCenter;
+    }
+
+    public void setResearchCenter(ResearchCenter researchCenter) {
+        this.researchCenter = researchCenter;
+    }
+
+    public List<StorageLocation> getStorageLocations() {
+        return storageLocations;
+    }
+
+    public void setStorageLocations(List<StorageLocation> storageLocations) {
+        this.storageLocations = storageLocations;
+    }
 }
 
