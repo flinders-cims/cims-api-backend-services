@@ -98,5 +98,9 @@ public class ResearchService {
     public long getResearchCountByUserId(int userId) {
         return researchRepository.findByUser_UserId(userId).stream().count();
     }
+
+    public Research getResearchByTitle(String title) {
+        return researchRepository.findByTitle(title);
+    }
 }
 

@@ -24,6 +24,16 @@ public class Chemical{
 
     @Column(name = "disposal_procedure", columnDefinition = "TEXT")
     private String disposalProcedure;
+    @Column(name = "cas_number", columnDefinition = "TEXT")
+    private String casNumber;
+
+    public String getCasNumber() {
+        return casNumber;
+    }
+
+    public void getCasNumber(String casNumber) {
+        this.casNumber = casNumber;
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "risk_level", nullable = false)

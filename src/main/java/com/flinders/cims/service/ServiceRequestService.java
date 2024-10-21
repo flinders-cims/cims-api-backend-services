@@ -29,29 +29,30 @@ public class ServiceRequestService {
         int srId = randomNumber.generateRandomNumber();
         ServiceRequest serviceRequest = new ServiceRequest();
         serviceRequest.setSrId(srId);
-        Chemical chemical = chemicalService.getChemicalById(serviceRequestDTO.getChemicalId()).orElse(null);
-        Research research = researchService.getResearchById(serviceRequestDTO.getResearchId());
+
+        Chemical chemical = chemicalService.getChemicalByName(serviceRequestDTO.getChemicalName()).orElse(null);
+        if(chemical == null) {
+            chemical = chemicalService.getChemicalByCasNumber(serviceRequestDTO.getCasNumber()).orElse(null);
+        }
+        Research research = researchService.getResearchByTitle(serviceRequestDTO.getResearchTitle());
         User user = userService.getUserById(serviceRequestDTO.getUserId());
+
+        RiskLevel riskLevel = evaluateRisk(serviceRequestDTO.getRiskScore());
         serviceRequest.setUser(user);
         serviceRequest.setResearch(research);
         serviceRequest.setChemical(chemical);
         serviceRequest.setStatus(serviceRequestDTO.getStatus());
-        serviceRequest.setStatus(serviceRequestDTO.getStatus());
-        serviceRequest.setStatus(serviceRequestDTO.getStatus());
-        serviceRequest.setRiskLevel(serviceRequestDTO.getRiskLevel());
+        serviceRequest.setRiskLevel(riskLevel);
         serviceRequest.setDateRequested(serviceRequestDTO.getDateRequested());
-        serviceRequest.setDateApproved(serviceRequestDTO.getDateApproved());
-        serviceRequest.setDateClosed(serviceRequestDTO.getDateClosed());
         serviceRequest.setApproverUsername(serviceRequestDTO.getApproverUsername());
-        serviceRequest.setApproverComments(serviceRequestDTO.getApproverComments());
         serviceRequest.setQuantityRequested(serviceRequestDTO.getQuantityRequested());
-        serviceRequest.setQuantityReceived(serviceRequestDTO.getQuantityReceived());
         serviceRequest.setUnitOfQuantity(serviceRequestDTO.getUnitOfQuantity());
-        serviceRequest.setQuantityDisposed(serviceRequestDTO.getQuantityDisposed());
-        serviceRequest.setQuantityReturned(serviceRequestDTO.getQuantityReturned());
-        serviceRequest.setReturnedDate(serviceRequestDTO.getReturnedDate());
         serviceRequest.setRiskScore(serviceRequestDTO.getRiskScore());
         serviceRequest.setCasNumber(serviceRequestDTO.getCasNumber());
+        serviceRequest.setHazardType(serviceRequestDTO.getHazardType());
+        serviceRequest.setToxic(serviceRequestDTO.isToxic());
+        serviceRequest.setToxicEffect(serviceRequestDTO.getToxicEffect());
+
         return serviceRequestRepository.save(serviceRequest);
     }
 
@@ -73,5 +74,14 @@ public class ServiceRequestService {
     public ServiceRequest updateServiceRequest(ServiceRequest existingServiceRequest,ServiceRequest serviceRequest) {
         existingServiceRequest.setStatus(serviceRequest.getStatus());
         return serviceRequestRepository.save(existingServiceRequest);
+    }
+
+    public RiskLevel evaluateRisk(int value) {
+        return switch (value) {
+            case 1, 2, 3 -> RiskLevel.LOW;
+            case 4, 5, 6, 7 -> RiskLevel.MEDIUM;
+            case 8, 9, 10 -> RiskLevel.HIGH;
+            default -> throw new IllegalArgumentException("Value must be between 1 and 10");
+        };
     }
 }

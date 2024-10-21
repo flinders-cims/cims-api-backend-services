@@ -85,15 +85,5 @@ public class ChemicalController {
             return ResponseEntity.notFound().build();
         }
     }
-
-//    @Operation(summary = "Retrieve all chemicals for a given user", description = "Fetches all chemicals associated with a user.")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of chemicals"),
-//            @ApiResponse(responseCode = "500", description = "Internal server error")
-//    })
-//    @GetMapping("/getAll/{userId}")
-//    public List<Chemical> getAllChemicalsByUserId(@PathVariable int userId) {
-//        return chemicalService.getChemicalsByUserId(userId);
-//    }
 }
 
