@@ -24,7 +24,6 @@ public class ChemicalService {
 
     // Add a new chemical
     public Chemical createChemical(Chemical chemical) {
-        // Check if a chemical with the same systematic name already exists
         Optional<Chemical> existingChemical = chemicalRepository.findBySystematicName(chemical.getSystematicName());
         if (existingChemical.isPresent()) {
             throw new IllegalArgumentException("Chemical with systematic name already exists");

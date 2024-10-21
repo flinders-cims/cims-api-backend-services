@@ -31,9 +31,6 @@ public class ServiceRequestService {
         serviceRequest.setSrId(srId);
 
         Chemical chemical = chemicalService.getChemicalByName(serviceRequestDTO.getChemicalName()).orElse(null);
-        if(chemical == null) {
-            chemical = chemicalService.getChemicalByCasNumber(serviceRequestDTO.getCasNumber()).orElse(null);
-        }
         Research research = researchService.getResearchByTitle(serviceRequestDTO.getResearchTitle());
         User user = userService.getUserById(serviceRequestDTO.getUserId());
 
@@ -71,8 +68,71 @@ public class ServiceRequestService {
         serviceRequestRepository.deleteById(id);
     }
 
-    public ServiceRequest updateServiceRequest(ServiceRequest existingServiceRequest,ServiceRequest serviceRequest) {
-        existingServiceRequest.setStatus(serviceRequest.getStatus());
+    public ServiceRequest updateServiceRequest(ServiceRequest existingServiceRequest, ServiceRequestDTO serviceRequest) {
+
+        // Check and update the status field
+        if (serviceRequest.getStatus() != null) {
+            existingServiceRequest.setStatus(serviceRequest.getStatus());
+        }
+
+        // Check and update approverComments field
+        if (serviceRequest.getApproverComments() != null) {
+            existingServiceRequest.setApproverComment(serviceRequest.getApproverComments());
+        }
+
+        // Check and update dateApproved field
+        if (serviceRequest.getDateApproved() != null) {
+            existingServiceRequest.setDateApproved(serviceRequest.getDateApproved());
+        }
+
+        // Check and update dateRejected field
+        if (serviceRequest.getDateRejected() != null) {
+            existingServiceRequest.setDateRejected(serviceRequest.getDateRejected());
+        }
+
+        // Check and update dateClosed field
+        if (serviceRequest.getDateClosed() != null) {
+            existingServiceRequest.setDateClosed(serviceRequest.getDateClosed());
+        }
+
+        // Check and update approverUsername field
+        if (serviceRequest.getApproverUsername() != null) {
+            existingServiceRequest.setApproverUsername(serviceRequest.getApproverUsername());
+        }
+
+        // Check and update quantityDisposed field (ensure it's greater than 0)
+        if (serviceRequest.getQuantityDisposed() > 0) {
+            existingServiceRequest.setQuantityDisposed(serviceRequest.getQuantityDisposed());
+        }
+
+        // Check and update quantityReturned field (ensure it's greater than 0)
+        if (serviceRequest.getQuantityReturned() > 0) {
+            existingServiceRequest.setQuantityReturned(serviceRequest.getQuantityReturned());
+        }
+
+        // Check and update returnedDate field
+        if (serviceRequest.getReturnedDate() != null) {
+            existingServiceRequest.setReturnedDate(serviceRequest.getReturnedDate());
+        }
+
+//        // Check and update storageLocationId field (ensure it's greater than 0)
+//        if (serviceRequest.getStorageLocationId() > 0) {
+//            StorageLocation storageLocation = storageLocationRepository.findById(serviceRequest.getStorageLocationId())
+//                    .orElseThrow(() -> new RuntimeException("Storage location not found"));
+//            existingServiceRequest.setStorageLocation(storageLocation);
+//        }
+
+        // Check and update isStored field
+        if (serviceRequest.isStored()) {
+            existingServiceRequest.setStored(serviceRequest.isStored());
+        }
+
+        // Check and update isDisposed field
+        if (serviceRequest.isDisposed()) {
+            existingServiceRequest.setDisposed(serviceRequest.isDisposed());
+        }
+
+        // Save the updated entity
         return serviceRequestRepository.save(existingServiceRequest);
     }
 

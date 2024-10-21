@@ -22,7 +22,48 @@ public class ResearchCenter {
     @OneToMany(mappedBy = "researchCenter", cascade = CascadeType.ALL)
     private List<Laboratory> laboratories;
 
+    public int getCenterId() {
+        return centerId;
+    }
+
+    public void setCenterId(int centerId) {
+        this.centerId = centerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
+
+    public List<Laboratory> getLaboratories() {
+        return laboratories;
+    }
+
+    public void setLaboratories(List<Laboratory> laboratories) {
+        this.laboratories = laboratories;
+    }
+
+    public List<StorageLocation> getStorageLocations() {
+        return storageLocations;
+    }
+
+    public void setStorageLocations(List<StorageLocation> storageLocations) {
+        this.storageLocations = storageLocations;
+    }
+
     @OneToMany(mappedBy = "researchCenter", cascade = CascadeType.ALL)
     private List<StorageLocation> storageLocations;
+
 }
 
