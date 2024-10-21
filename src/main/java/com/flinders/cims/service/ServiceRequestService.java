@@ -144,4 +144,8 @@ public class ServiceRequestService {
             default -> throw new IllegalArgumentException("Value must be between 1 and 10");
         };
     }
+
+    public List<ServiceRequest> getServiceRequestsByUserAndStatus(int userId, String status) {
+        return serviceRequestRepository.findByUser_UserIdAndStatus(userId, status);
+    }
 }

@@ -18,7 +18,7 @@ public class ServiceRequestController {
     private ServiceRequestService serviceRequestService;
 
     // Create a new ServiceRequest
-        @PostMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<ServiceRequest> createServiceRequest(@RequestBody ServiceRequestDTO serviceRequest) {
         ServiceRequest createdRequest = serviceRequestService.saveServiceRequest(serviceRequest);
         return ResponseEntity.ok(createdRequest);
@@ -28,6 +28,20 @@ public class ServiceRequestController {
     @GetMapping("/get-all")
     public ResponseEntity<List<ServiceRequest>> getAllServiceRequests() {
         List<ServiceRequest> serviceRequests = serviceRequestService.getAllServiceRequests();
+        return ResponseEntity.ok(serviceRequests);
+    }
+
+    @GetMapping("/get-all/{userId}/status/{status}")
+    public ResponseEntity<List<ServiceRequest>> getServiceRequestsByUserAndStatus(
+            @PathVariable int userId,
+            @PathVariable String status) {
+
+        List<ServiceRequest> serviceRequests = serviceRequestService.getServiceRequestsByUserAndStatus(userId, status);
+
+        if (serviceRequests.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
         return ResponseEntity.ok(serviceRequests);
     }
 
