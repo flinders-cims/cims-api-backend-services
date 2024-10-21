@@ -31,7 +31,7 @@ public class Chemical{
         return casNumber;
     }
 
-    public void getCasNumber(String casNumber) {
+    public void setCasNumber(String casNumber) {
         this.casNumber = casNumber;
     }
 
