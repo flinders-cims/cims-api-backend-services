@@ -54,7 +54,7 @@ public class ServiceRequestController {
     }
 
     // Update an existing ServiceRequest
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{userId}")
     public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int userId, @RequestBody ServiceRequestDTO serviceRequestDTO) {
         Optional<ServiceRequest> existingServiceRequest = serviceRequestService.getServiceRequestById(userId);
         if (existingServiceRequest.isPresent()) {
