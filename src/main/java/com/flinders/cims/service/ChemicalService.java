@@ -11,18 +11,13 @@ import java.util.Optional;
 
 @Service
 public class ChemicalService {
-
     @Autowired
     private ChemicalRepository chemicalRepository;
     @Autowired
     private RandomNumber randomNumber;
-
-    // Retrieve all chemicals
     public List<Chemical> getAllChemicals() {
         return chemicalRepository.findAll();
     }
-
-    // Retrieve a single chemical by ID
     public Optional<Chemical> getChemicalById(int chemicalId) {
         return chemicalRepository.findById(chemicalId);
     }
