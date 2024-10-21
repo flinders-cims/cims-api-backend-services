@@ -1,5 +1,6 @@
 package com.flinders.cims.controller;
 
+import com.flinders.cims.model.ChemicalInHand;
 import com.flinders.cims.model.ServiceRequest;
 import com.flinders.cims.model.ServiceRequestDTO;
 import com.flinders.cims.service.ServiceRequestService;
@@ -63,11 +64,18 @@ public class ServiceRequestController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    // Delete a ServiceRequest by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteServiceRequest(@PathVariable int id) {
         serviceRequestService.deleteServiceRequest(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/in-hand/{userId}")
+    public ResponseEntity<List<ChemicalInHand>> getChemicalsInHandByUserAndStatus(
+            @PathVariable int userId) {
+        List<ChemicalInHand> chemicalsInHand = serviceRequestService.getChemicalsInHand(userId,"approved");
+        return ResponseEntity.ok(chemicalsInHand);
+    }
+
 }
+

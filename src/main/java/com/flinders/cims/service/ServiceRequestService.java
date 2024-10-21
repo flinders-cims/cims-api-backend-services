@@ -6,8 +6,10 @@ import com.flinders.cims.util.RandomNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceRequestService {
@@ -147,5 +149,18 @@ public class ServiceRequestService {
 
     public List<ServiceRequest> getServiceRequestsByUserAndStatus(int userId, String status) {
         return serviceRequestRepository.findByUser_UserIdAndStatus(userId, status);
+    }
+
+    public List<ChemicalInHand> getChemicalsInHand(int userId, String status) {
+        List<ServiceRequest> srs = serviceRequestRepository.findByUser_UserIdAndStatus(userId, status);
+        return srs.stream()
+                .map(serviceRequest -> new ChemicalInHand(
+                        serviceRequest.getChemical().getChemicalId(),
+                        serviceRequest.getResearch().getResearchId(),
+                        serviceRequest.getSrId(),
+                        serviceRequest.getQuantityRequested(),
+                        serviceRequest.getChemical().getChemicalName(),
+                        serviceRequest.getUnitOfQuantity()))
+                .collect(Collectors.toList());
     }
 }
