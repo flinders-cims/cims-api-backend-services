@@ -117,8 +117,8 @@ public class ServiceRequestService {
             existingServiceRequest.setReturnedDate(serviceRequest.getReturnedDate());
         }
 
-        if (serviceRequest.isSentFromSupervisor()) {
-            existingServiceRequest.setSentFromSupervisor(serviceRequest.isSentFromSupervisor());
+        if (serviceRequest.getIsSentFromSupervisor()) {
+            existingServiceRequest.setSentFromSupervisor(serviceRequest.getIsSentFromSupervisor());
         }
 
         // Check and update isStored field
