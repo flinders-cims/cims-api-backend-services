@@ -34,6 +34,13 @@ public class User {
     @Column(name = "phone_number", nullable = false)  // Customize column name and set nullable constraint
     private long phoneNumber;
 
+    @Column(name = "higher_approver_user_name", nullable = false)  // Customize column name and set nullable constraint
+    private String higherApproverUsername;
+
+    public void setHigherApproverUsername(String higherApproverUsername) {
+        this.higherApproverUsername = higherApproverUsername;
+    }
+
     // Getters and Setters
     public int getUserId() {
         return userId;
