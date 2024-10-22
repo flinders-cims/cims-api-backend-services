@@ -163,4 +163,8 @@ public class ServiceRequestService {
                         serviceRequest.getUnitOfQuantity()))
                 .collect(Collectors.toList());
     }
+
+    public List<ServiceRequest> getServiceRequestsByUsernameAndStatus(String managerUserName, String status) {
+        return serviceRequestRepository.findByUser_ManagerUserNameAndStatus(managerUserName, status);
+    }
 }

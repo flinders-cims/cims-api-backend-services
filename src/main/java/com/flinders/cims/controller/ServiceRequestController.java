@@ -76,5 +76,19 @@ public class ServiceRequestController {
         List<ChemicalInHand> chemicalsInHand = serviceRequestService.getChemicalsInHand(userId,"approved");
         return ResponseEntity.ok(chemicalsInHand);
     }
+
+    @GetMapping("/get-all/manager/{username}/status/{status}")
+    public ResponseEntity<List<ServiceRequest>> getServiceRequestsByUsernameAndStatus(
+            @PathVariable String username,
+            @PathVariable String status) {
+
+        List<ServiceRequest> serviceRequests = serviceRequestService.getServiceRequestsByUsernameAndStatus(username, status);
+
+        if (serviceRequests.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(serviceRequests);
+    }
 }
 
