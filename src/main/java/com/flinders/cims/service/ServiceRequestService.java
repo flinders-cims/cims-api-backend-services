@@ -117,12 +117,13 @@ public class ServiceRequestService {
             existingServiceRequest.setReturnedDate(serviceRequest.getReturnedDate());
         }
 
-//        // Check and update storageLocationId field (ensure it's greater than 0)
-//        if (serviceRequest.getStorageLocationId() > 0) {
-//            StorageLocation storageLocation = storageLocationRepository.findById(serviceRequest.getStorageLocationId())
-//                    .orElseThrow(() -> new RuntimeException("Storage location not found"));
-//            existingServiceRequest.setStorageLocation(storageLocation);
-//        }
+        if (serviceRequest.getHigherApproverUsername() != null) {
+            existingServiceRequest.setHigherApproverUsername(serviceRequest.getHigherApproverUsername());
+        }
+
+        if (serviceRequest.isSentFromSupervisor()) {
+            existingServiceRequest.setSentFromSupervisor(serviceRequest.isSentFromSupervisor());
+        }
 
         // Check and update isStored field
         if (serviceRequest.isStored()) {
