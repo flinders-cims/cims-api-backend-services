@@ -9,6 +9,11 @@ public class UserDTO {
     private String emailId;
     private long phoneNumber;
     private String managerUserName;
+    private String higherApproverUsername;
+
+    public String getHigherApproverUsername() {
+        return higherApproverUsername;
+    }
 
     // Getters and Setters
     public String getFirstName() {

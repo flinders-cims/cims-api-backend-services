@@ -117,10 +117,6 @@ public class ServiceRequestService {
             existingServiceRequest.setReturnedDate(serviceRequest.getReturnedDate());
         }
 
-        if (serviceRequest.getHigherApproverUsername() != null) {
-            existingServiceRequest.setHigherApproverUsername(serviceRequest.getHigherApproverUsername());
-        }
-
         if (serviceRequest.isSentFromSupervisor()) {
             existingServiceRequest.setSentFromSupervisor(serviceRequest.isSentFromSupervisor());
         }

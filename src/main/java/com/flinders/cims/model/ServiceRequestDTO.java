@@ -13,7 +13,6 @@ public class ServiceRequestDTO {
     private LocalDate dateRejected;
     private LocalDate dateClosed;
     private String approverUsername;
-    private String higherApproverUsername;
     private String approverComments;
     private int quantityRequested;
     private int quantityApproved;
@@ -137,14 +136,6 @@ public class ServiceRequestDTO {
 
     public boolean isDisposed() {
         return isDisposed;
-    }
-
-    public String getHigherApproverUsername() {
-        return higherApproverUsername;
-    }
-
-    public void setHigherApproverUsername(String higherApproverUsername) {
-        this.higherApproverUsername = higherApproverUsername;
     }
 
     public boolean isSentFromSupervisor() {

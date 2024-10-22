@@ -45,9 +45,6 @@ public class ServiceRequest {
     @Column(name = "approver_user_name", columnDefinition = "TEXT")
     private String approverUsername;
 
-    @Column(name = "higher_approver_user_name", columnDefinition = "TEXT")
-    private String higherApproverUsername;
-
     @Column(name = "approver_comment", columnDefinition = "TEXT")
     private String approverComment;
 
@@ -96,10 +93,6 @@ public class ServiceRequest {
 
     @Column(name = "is_sent_from_supervisor")
     private boolean isSentFromSupervisor;
-
-    public void setHigherApproverUsername(String higherApproverUsername) {
-        this.higherApproverUsername = higherApproverUsername;
-    }
 
     public void setSentFromSupervisor(boolean sentFromSupervisor) {
         isSentFromSupervisor = sentFromSupervisor;
