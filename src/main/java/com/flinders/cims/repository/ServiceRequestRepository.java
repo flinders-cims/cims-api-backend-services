@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ServiceRequestRepository extends JpaRepository<ServiceRequest, Integer> {
     List<ServiceRequest> findByUser_UserIdAndStatus(int userId, String status);
+    List<ServiceRequest> findByUser_ManagerUserNameAndStatus(String managerUserName, String status);
 }

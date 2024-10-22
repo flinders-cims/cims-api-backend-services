@@ -47,16 +47,16 @@ public class ServiceRequestController {
     }
 
     // Get a single ServiceRequest by ID
-    @GetMapping("/get/{userId}")
-    public ResponseEntity<ServiceRequest> getServiceRequestById(@PathVariable int userId) {
-        Optional<ServiceRequest> serviceRequest = serviceRequestService.getServiceRequestById(userId);
+    @GetMapping("/get/{id}")
+    public ResponseEntity<ServiceRequest> getServiceRequestById(@PathVariable int id) {
+        Optional<ServiceRequest> serviceRequest = serviceRequestService.getServiceRequestById(id);
         return serviceRequest.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Update an existing ServiceRequest
-    @PutMapping("/update/{userId}")
-    public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int userId, @RequestBody ServiceRequestDTO serviceRequestDTO) {
-        Optional<ServiceRequest> existingServiceRequest = serviceRequestService.getServiceRequestById(userId);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int id, @RequestBody ServiceRequestDTO serviceRequestDTO) {
+        Optional<ServiceRequest> existingServiceRequest = serviceRequestService.getServiceRequestById(id);
         if (existingServiceRequest.isPresent()) {
             ServiceRequest updatedRequest = serviceRequestService.updateServiceRequest(existingServiceRequest.get(), serviceRequestDTO);
             return ResponseEntity.ok(updatedRequest);
@@ -77,5 +77,18 @@ public class ServiceRequestController {
         return ResponseEntity.ok(chemicalsInHand);
     }
 
+    @GetMapping("/get-all/manager/{username}/status/{status}")
+    public ResponseEntity<List<ServiceRequest>> getServiceRequestsByUsernameAndStatus(
+            @PathVariable String username,
+            @PathVariable String status) {
+
+        List<ServiceRequest> serviceRequests = serviceRequestService.getServiceRequestsByUsernameAndStatus(username, status);
+
+        if (serviceRequests.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(serviceRequests);
+    }
 }
 
