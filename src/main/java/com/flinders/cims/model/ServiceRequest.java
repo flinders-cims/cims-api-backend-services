@@ -89,15 +89,19 @@ public class ServiceRequest {
     private boolean isStored;  // Newly added field for storage status
 
     @Column(name = "is_disposed", nullable = false)
-    private boolean isDisposed;  // Newly added field for disposal status
+    private boolean isDisposed;
 
     @Column(name = "is_sent_from_supervisor")
     private boolean isSentFromSupervisor;
 
-    public void setSentFromSupervisor(boolean sentFromSupervisor) {
-        isSentFromSupervisor = sentFromSupervisor;
+    public void setSentFromSupervisor(boolean isSentFromSupervisor) {
+        this.isSentFromSupervisor = isSentFromSupervisor;
     }
-// Getters and Setters
+
+    public boolean getIsSentFromSupervisor() {
+        return isSentFromSupervisor;
+    }
+    // Getters and Setters
 
     public int getSrId() {
         return srId;

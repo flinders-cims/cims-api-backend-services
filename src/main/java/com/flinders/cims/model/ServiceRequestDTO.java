@@ -138,11 +138,7 @@ public class ServiceRequestDTO {
         return isDisposed;
     }
 
-    public boolean isSentFromSupervisor() {
+    public boolean getIsSentFromSupervisor() {
         return isSentFromSupervisor;
-    }
-
-    public void setSentFromSupervisor(boolean sentFromSupervisor) {
-        isSentFromSupervisor = sentFromSupervisor;
     }
 }
