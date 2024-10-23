@@ -42,6 +42,7 @@ public class UserService {
         user.setEmailId(userDTO.getEmailId());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setManagerUserName(userDTO.getManagerUserName());
+        user.setHigherApproverUsername(userDTO.getHigherApproverUsername());
         return userRepository.save(user);
     }
 

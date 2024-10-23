@@ -157,7 +157,8 @@ public class ServiceRequestService {
                         serviceRequest.getSrId(),
                         serviceRequest.getQuantityRequested(),
                         serviceRequest.getChemical().getChemicalName(),
-                        serviceRequest.getUnitOfQuantity()))
+                        serviceRequest.getUnitOfQuantity(),
+                        serviceRequest.getRiskLevel().toString()))
                 .collect(Collectors.toList());
     }
 

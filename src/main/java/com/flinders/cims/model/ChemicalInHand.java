@@ -8,18 +8,28 @@ public class ChemicalInHand {
     private int quantity;             // Quantity of the chemical in hand
     private String chemicalName;      // Name of the chemical
     private String unitOfQuantity;    // Unit for measuring the quantity
+    private String genericRiskCategory;
+
+    public String getGenericRiskCategory() {
+        return genericRiskCategory;
+    }
+
+    public void setGenericRiskCategory(String genericRiskCategory) {
+        this.genericRiskCategory = genericRiskCategory;
+    }
 
     // Constructors
     public ChemicalInHand() {
     }
 
-    public ChemicalInHand(int chemicalId, int researchId, int srId, int quantity, String chemicalName, String unitOfQuantity) {
+    public ChemicalInHand(int chemicalId, int researchId, int srId, int quantity, String chemicalName, String unitOfQuantity, String genericRiskCategory) {
         this.chemicalId = chemicalId;
         this.researchId = researchId;
         this.srId = srId;
         this.quantity = quantity;
         this.chemicalName = chemicalName;
         this.unitOfQuantity = unitOfQuantity;
+        this.genericRiskCategory = genericRiskCategory;
     }
 
     // Getters and Setters
